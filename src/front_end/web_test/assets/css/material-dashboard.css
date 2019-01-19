@@ -15,6 +15,17 @@
 
 /*     brand Colors              */
 
+@media screen and (min-width: 992px) {
+  #card-goals, #card-journal, #card-calendar{
+    min-height: 550px;
+  }
+
+  #card-journal form {
+    min-height: auto;
+  }
+}
+
+
 .card {
   font-size: .875rem;
 }
@@ -18826,9 +18837,3 @@ Copyright (c) 2015 Daniel Eden
 }
 
 /*# sourceMappingURL=dashboard-free.css.map */
-
-@media screen and (min-width: 992px) {
-  #card-goals, #card-journal, #card-calendar{
-    min-height: 560px;
-  }
-}
