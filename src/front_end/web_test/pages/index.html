@@ -134,15 +134,15 @@
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./help.html">
-              <i class="material-icons">warning</i>
-              <p>Seek Urgent Help</p>
-            </a>
-          </li>
-          <li class="nav-item ">
             <a class="nav-link" href="./treatment.html">
               <i class="material-icons">local_hospital</i>
               <p>Ongoing Treatment</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="./help.html">
+              <i class="material-icons">warning</i>
+              <p>Seek Urgent Help</p>
             </a>
           </li>
           <li class="nav-item ">
@@ -330,7 +330,7 @@
               <div id="card-journal" class="card">
                 <div class="card-header card-header-danger">
                   <h4 class="card-title">Journal</h4>
-                  <p class="card-category">Note down anything interesting</p>
+                  <p class="card-category">Make a record of today</p>
                 </div>
                 <div class="card-body">
                   <form>
@@ -340,12 +340,75 @@
                           <label>What happened today?</label>
                           <div class="form-group">
                             <label class="bmd-label-floating">Write about it here.</label>
-                            <textarea class="form-control" rows="16"></textarea>
+                            <textarea class="form-control" rows="4"></textarea>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-danger pull-right">Update Journal</button>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>What is your current level of...</label>
+                          <br />
+                          <label style="font-size: 0.7rem;">(From zero to maximum desired level)</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Happiness</label>
+                          <div class="form-group">
+                            <input type="range" class="custom-range" min="0" max="100" value="0" step="0">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Sadness</label>
+                          <div class="form-group">
+                            <input type="range" class="custom-range" min="0" max="100" value="0" step="0">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Anger</label>
+                          <div class="form-group">
+                            <input type="range" class="custom-range" min="0" max="100" value="0" step="0">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Disgust</label>
+                          <div class="form-group">
+                            <input type="range" class="custom-range" min="0" max="100" value="0" step="0">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Productivity</label>
+                          <div class="form-group">
+                            <input type="range" class="custom-range" min="0" max="100" value="0" step="0">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Stress</label>
+                          <div class="form-group">
+                            <input type="range" class="custom-range" min="0" max="100" value="0" step="0">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-danger pull-right">Update</button>
                     <div class="clearfix"></div>
                   </form>
                 </div>
