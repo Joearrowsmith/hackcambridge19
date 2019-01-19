@@ -1,3 +1,4 @@
 env/*
 .vscode/*
 *.txt
+.ipynb_checkpoints/*
