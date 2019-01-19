@@ -22,12 +22,13 @@ def tester(request):
     else:
         print('GET request')
         form = NameForm()
-    return render(request, 'mainService/formTest.html', {'form':form})    
+    context = initialize_context(request)
+    context['form'] = form
+    print(context)
+    return render(request, 'mainService/formTest.html', context)    
 
 
-def home_page(request):
-    #point this to the html file when the templates are done
-    return HttpResponse("Testing main page")
+
 
 """
 ALL VIEWS FOLLWING THIS ARE TAKEN FROM THE MICROSOFT TUTORIAL ON USING THEIR GRAPH API
@@ -47,12 +48,6 @@ def initialize_context(request):
   context['user'] = request.session.get('user', {'is_authenticated': False})
   return context
 
-
-def home(request):
-  context = initialize_context(request)
-
-  return render(request, 'mainService/home.html', context)
-
 def sign_in(request):
   # Get the sign-in URL
   sign_in_url, state = get_sign_in_url()
@@ -66,7 +61,7 @@ def sign_out(request):
   # Clear out the user and token
   remove_user_and_token(request)
 
-  return HttpResponseRedirect(reverse('home'))
+  return HttpResponseRedirect(reverse('tester'))
 
 def callback(request):
   # Get the state saved in session
@@ -81,22 +76,4 @@ def callback(request):
   store_token(request, token)
   store_user(request, user)
 
-  return HttpResponseRedirect(reverse('home'))
-
-def calendar(request):
-  context = initialize_context(request)
-
-  token = get_token(request)
-
-  events = get_calendar_events(token)
-
-  if events:
-    # Convert the ISO 8601 date times to a datetime object
-    # This allows the Django template to format the value nicely
-    for event in events['value']:
-      event['start']['dateTime'] = dateutil.parser.parse(event['start']['dateTime'])
-      event['end']['dateTime'] = dateutil.parser.parse(event['end']['dateTime'])
-
-    context['events'] = events['value']
-
-  return render(request, 'mainService/calendar.html', context)
+  return HttpResponseRedirect(reverse('tester'))
