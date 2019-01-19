@@ -9,6 +9,9 @@ from .forms import NameForm
 # Create your views here.
 
 
+def main_page(request):
+    return render(request, 'mainService/index.html')
+
 #rewrite home_page as a class once input needs to be taken
 def tester(request):
     if request.method == 'POST':
@@ -16,7 +19,7 @@ def tester(request):
         form = NameForm(request.POST)
         if form.is_valid():
             print(form.cleaned_data)    
-            #1return HttpResponseRedirect('mainService')
+            #return HttpResponseRedirect('mainService')
         else:
             print('form was not valid')
     else:
