@@ -45,8 +45,8 @@
               </a>
             </li>
             <!-- your sidebar here -->
-            <li class="nav-item active">
-              <a class="nav-link" href="#">
+            <li class="nav-item">
+              <a class="nav-link" href="./user.html">
                 <i class="material-icons">person</i>
                 <p>User Profile</p>
               </a>
@@ -58,8 +58,8 @@
                 <p>Ongoing Treatment</p>
               </a>
             </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="./help.html">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">
                 <i class="material-icons">warning</i>
                 <p>Seek Urgent Help</p>
               </a>
@@ -78,7 +78,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="#pablo">User Profile</a>
+            <a class="navbar-brand" href="#pablo">Seek Urgent Help</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -112,31 +112,18 @@
       <div class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
               <div class="card">
-                <div class="card-header card-header-primary">
-                  <h4 class="card-title">Account Details</h4>
-                  <p class="card-category">Complete your profile</p>
+                <div class="card-header card-header-danger">
+                  <h4 class="card-title">Emergency Message</h4>
+                  <p class="card-category">Send an email to your emergency contact(s)</p>
                 </div>
                 <div class="card-body">
                   <form>
-                    <h4>Personal Details</h4>
                     <div class="row">
-                      <div class="col-md-5">
+                      <div class="col-md-12">
                         <div class="form-group">
-                          <label class="bmd-label-floating">First Name</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-5">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Surname</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-2">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Age</label>
+                          <label class="bmd-label-floating">Subject</label>
                           <input type="text" class="form-control">
                         </div>
                       </div>
@@ -144,271 +131,17 @@
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Email Address</label>
-                          <input type="email" class="form-control">
-                        </div>
-                      </div>
-
-                    </div>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <label>Personal Message</label>
+                          <label>Message</label>
                           <div class="form-group">
-                            <label class="bmd-label-floating">This will be displayed on the right.</label>
-                            <textarea class="form-control" rows="3"></textarea>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <label>What is your desired level of...</label>
-                          <br />
-                          <label style="font-size: 0.7rem;">(Set your minimum desired threshold)</label>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label>Happiness</label>
-                          <div class="form-group">
-                            <input type="range" class="custom-range" min="0" max="100" value="0" step="0">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label>Sadness</label>
-                          <div class="form-group">
-                            <input type="range" class="custom-range" min="0" max="100" value="0" step="0">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label>Anger</label>
-                          <div class="form-group">
-                            <input type="range" class="custom-range" min="0" max="100" value="0" step="0">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label>Disgust</label>
-                          <div class="form-group">
-                            <input type="range" class="custom-range" min="0" max="100" value="0" step="0">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label>Productivity</label>
-                          <div class="form-group">
-                            <input type="range" class="custom-range" min="0" max="100" value="0" step="0">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label>Stress</label>
-                          <div class="form-group">
-                            <input type="range" class="custom-range" min="0" max="100" value="0" step="0">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <hr>
-                    <h4>Ongoing Treatment Details</h4>
-                    <h6>Medication</h6>
-                    <div class="row">
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Type</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-2">
-                        <div class="form-group">
-                              <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                <option selected>Amount</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="3">4</option>
-                                <option value="3">5</option>
-                                <option value="3">6</option>
-                                <option value="3">7</option>
-                                <option value="3">8</option>
-                                <option value="3">9</option>
-                                <option value="3">10</option>
-                                <option value="3">11</option>
-                                <option value="3">12</option>
-                              </select>
-                        </div>
-                      </div>
-                      <div class="col-md-3">
-                        <div class="form-group">
-                              <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                <option selected>Frequency</option>
-                                <option value="1">Hour(s)</option>
-                                <option value="2">Day(s)</option>
-                              </select>
-                        </div>
-                      </div>
-                      <div class="col-md-3">
-                        <button type="button" rel="tooltip" title="Edit" class="btn btn-primary btn-link btn-sm">
-                          <i class="material-icons">edit</i>
-                        </button>
-                        <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                          <i class="material-icons">close</i>
-                        </button>
-                        <button type="button" rel="tooltip" title="Add New" class="btn btn-success btn-link btn-sm">
-                          <i class="material-icons">add</i>
-                        </button>
-                      </div>
-                    </div>
-                    <h6>Appointments</h6>
-                    <div class="row">
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Type</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-2">
-                        <div class="form-group">
-                              <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                <option selected>Amount</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="3">4</option>
-                                <option value="3">5</option>
-                                <option value="3">6</option>
-                                <option value="3">7</option>
-                                <option value="3">8</option>
-                                <option value="3">9</option>
-                                <option value="3">10</option>
-                                <option value="3">11</option>
-                                <option value="3">12</option>
-                              </select>
-                        </div>
-                      </div>
-                      <div class="col-md-3">
-                        <div class="form-group">
-                              <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                <option selected>Frequency</option>
-                                <option value="1">Daily</option>
-                                <option value="2">Weekly</option>
-                                <option value="2">Monthly</option>
-                                <option value="2">Yearly</option>
-                              </select>
-                        </div>
-                      </div>
-                      <div class="col-md-3">
-                        <button type="button" rel="tooltip" title="Edit" class="btn btn-primary btn-link btn-sm">
-                          <i class="material-icons">edit</i>
-                        </button>
-                        <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                          <i class="material-icons">close</i>
-                        </button>
-                        <button type="button" rel="tooltip" title="Add New" class="btn btn-success btn-link btn-sm">
-                          <i class="material-icons">add</i>
-                        </button>
-                      </div>
-                    </div>
-                    <hr>
-                    <h4>Emergency Contact(s) Details</h4>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">First Name</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-2">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Surname</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-5">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Email Address</label>
-                          <input type="email" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-3">
-                        <button type="button" rel="tooltip" title="Edit" class="btn btn-primary btn-link btn-sm">
-                          <i class="material-icons">edit</i>
-                        </button>
-                        <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                          <i class="material-icons">close</i>
-                        </button>
-                        <button type="button" rel="tooltip" title="Add New" class="btn btn-success btn-link btn-sm">
-                          <i class="material-icons">add</i>
-                        </button>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <label>Default Emergency Message</label>
-                          <div class="form-group">
-                            <label class="bmd-label-floating">This will autofill the email to your emergency contact(s) when you have to seek urgent help.</label>
+                            <label class="bmd-label-floating">This will be sent to your emergency contact(s).</label>
                             <textarea class="form-control" rows="10"></textarea>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <hr>
-                    <h4>Security Details</h4>
-                    <h6>Change your password</h6>
-                    <div class="row">
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Username</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Current Password</label>
-                          <input type="password" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">New Password</label>
-                          <input type="password" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary pull-right">Update</button>
+                    <button type="submit" class="btn btn-danger pull-right">Send</button>
                     <div class="clearfix"></div>
                   </form>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card card-profile">
-                <div class="card-avatar">
-                  <a href="#pablo">
-                    <img class="img" src="../assets/img/new_logo.png" />
-                  </a>
-                </div>
-                <div class="card-body">
-                  <h4 class="card-title">Personal Message</h4>
-                  <p class="card-description">
-                    Message
-                  </p>
                 </div>
               </div>
             </div>
