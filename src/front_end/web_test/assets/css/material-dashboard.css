@@ -17,14 +17,36 @@
 
 @media screen and (min-width: 992px) {
   #card-goals, #card-journal, #card-calendar{
-    min-height: 550px;
+    min-height: 565px;
   }
 
   #card-journal form {
     min-height: auto;
   }
+
+  #card-progress {
+    min-height: 700px;
+  }
 }
 
+.card {
+  font-size: .875rem;
+}
+
+@media screen and (max-width: 768px) {
+  #card-goals, #card-journal, #card-calendar{
+    min-height: 0;
+  }
+
+  #card-journal form {
+    min-height: auto;
+  }
+
+  #card-progress {
+    min-height: 500px;
+  }
+
+}
 
 .card {
   font-size: .875rem;
