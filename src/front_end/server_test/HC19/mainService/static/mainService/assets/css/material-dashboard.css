@@ -15,6 +15,45 @@
 
 /*     brand Colors              */
 
+@media screen and (min-width: 992px) {
+  #card-goals, #card-journal, #card-calendar{
+    min-height: 650px;
+  }
+
+  #card-journal form {
+    min-height: auto;
+  }
+
+  #card-progress {
+    min-height: 700px;
+  }
+}
+
+.custom-range {
+  width:100%; /* sample value - set it as you like*/
+}
+
+
+
+.card {
+  font-size: .875rem;
+}
+
+@media screen and (max-width: 768px) {
+  #card-goals, #card-journal, #card-calendar{
+    min-height: 0;
+  }
+
+  #card-journal form {
+    min-height: auto;
+  }
+
+  #card-progress {
+    min-height: 500px;
+  }
+
+}
+
 .card {
   font-size: .875rem;
 }
@@ -10623,7 +10662,7 @@ fieldset[disabled][disabled] .btn-group-raised .btn,
 .btn.btn-sm,
 .btn-group-sm>.btn,
 .btn-group-sm .btn {
-  padding: 0.40625rem 1.25rem;
+  padding: 0.40625rem 0.7rem;
   font-size: 0.6875rem;
   line-height: 1.5;
   border-radius: 0.2rem;
