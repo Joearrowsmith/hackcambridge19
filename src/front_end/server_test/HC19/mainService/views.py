@@ -5,33 +5,41 @@ from mainService.auth_helper import get_sign_in_url, get_token_from_code, store_
 from mainService.graph_helper import get_user, get_calendar_events
 import dateutil.parser
 
-from .forms import NameForm
+from .forms import NameForm, JournalForm
 # Create your views here.
 
+def user_page(request):
+  return render(request, 'mainService/user.html')
+def treatment_page(request):
+  return render(request, 'mainService/treatment.html')
+def help_page(request):
+  return render(request, 'mainService/help.html')
 
 def main_page(request):
-    return render(request, 'mainService/index.html')
+  if request.method == 'POST':
+    if 'metric_submission' in request.POST:
+      print("Journal Entry Made:")
+      data_list = {}
+      for key, val in request.POST.items():  
+        if key not in  ['csrfmiddlewaretoken', 'metric_submission']:
+          data_list[key] = val
+      print(data_list)
+  context = initialize_context(request)
+  return render(request, 'mainService/index.html', context)
+
 
 #rewrite home_page as a class once input needs to be taken
 def tester(request):
-    if request.method == 'POST':
-        print('POST request')
-        form = NameForm(request.POST)
-        if form.is_valid():
-            print(form.cleaned_data)    
-            #return HttpResponseRedirect('mainService')
-        else:
-            print('form was not valid')
-    else:
-        print('GET request')
-        form = NameForm()
-    context = initialize_context(request)
-    context['form'] = form
-    print(context)
-    return render(request, 'mainService/formTest.html', context)    
+  if request.method == 'POST':
+    print('POST request')
+    if 'metric_submission' in request.POST:
+      print(request.POST)
+  else:
+    print('GET request')
 
+  context = initialize_context(request)
 
-
+  return render(request, 'mainService/formTest.html', context)    
 
 """
 ALL VIEWS FOLLWING THIS ARE TAKEN FROM THE MICROSOFT TUTORIAL ON USING THEIR GRAPH API
