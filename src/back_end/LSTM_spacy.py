@@ -16,21 +16,11 @@ dataset = loader.load_isear('data/isear.csv')
 
 #load the text data and clean it
 text_data_set = dataset.get_freetext_content()
-#text_data_set = np.asarray(text_data_set)
-#text_data_set = clean_data(text_data_set)
 
 #load the target emotion classes 
 target_set = np.asarray(dataset.get_target())
 target_chain = itertools.chain(*target_set)
 target_data = np.asarray(list(target_chain))
-
-#target_data = target_data[np.where(target_data != 5)]
-#target_data = target_data[np.where(target_data != 6)]
-#target_data = target_data[np.where(target_data != 7)]
-
-#text_data_set = text_data_set[np.where(target_data != 5)]
-#text_data_set = text_data_set[np.where(target_data != 6)]
-#text_data_set = text_data_set[np.where(target_data != 7)]
 
 # One-hot encoding of target values
 target_data = np_utils.to_categorical(target_data)
@@ -93,7 +83,6 @@ def f1(y_true, y_pred):
     recall = recall(y_true, y_pred)
     return 2*((precision*recall)/(precision+recall+K.epsilon()))
 
-"""
 import spacy
 
 nlp = spacy.load('en_core_web_md')
@@ -108,32 +97,6 @@ for word, idx in word2idx.items():
         embeddings_index[idx] = embedding
     except:
         pass
-"""
-
-#load 550 million tweets trained embedding space 
-GLOVE_PATH = 'data/ntua_twitter_affect_310.txt'
-GLOVE_VECTOR_LENGTH = 310
-
-def read_glove_vectors(path, lenght):
-    embeddings = {}
-    with open(path, encoding="utf8") as glove_f:
-        for line in glove_f:
-            chunks = line.split()
-            assert len(chunks) == lenght + 1
-            embeddings[chunks[0]] = np.array(chunks[1:], dtype='float32')
- 
-    return embeddings
- 
-GLOVE_INDEX = read_glove_vectors(GLOVE_PATH, GLOVE_VECTOR_LENGTH)
- 
-# Init the embeddings layer with GloVe embeddings
-embeddings_index = np.zeros((len(vectorizer.get_feature_names()) + 1, GLOVE_VECTOR_LENGTH))
-for word, idx in word2idx.items():
-    try:
-        embedding = GLOVE_INDEX[word]
-        embeddings_index[idx] = embedding
-    except:
-        pass
  
 from keras.models import Sequential
 from keras.layers import Dense, CuDNNLSTM, LSTM, Embedding, Conv1D, MaxPooling1D, Flatten
@@ -142,26 +105,18 @@ from keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLROnPlateau
 import keras.backend as K
  
 model = Sequential()
-"""
 model.add(Embedding(len(vectorizer.get_feature_names()) + 1,
                     EMBEDDINGS_LEN,
                     weights = [embeddings_index],
                     input_length=MAX_SEQ_LENGTH,
                     trainable = False))
-"""
-model.add(Embedding(len(vectorizer.get_feature_names()) + 1,
-                    GLOVE_VECTOR_LENGTH,  # Embedding size
-                    weights=[embeddings_index],
-                    input_length=MAX_SEQ_LENGTH,
-                    trainable=False))
-#model.add(CuDNNLSTM(EMBEDDINGS_LEN))
-model.add(CuDNNLSTM(GLOVE_VECTOR_LENGTH))
+model.add(CuDNNLSTM(EMBEDDINGS_LEN))
 model.add(Dense(units=7, activation='softmax'))
  
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy', f1])
 model.summary()
 
-checkpointer = ModelCheckpoint(filepath='models/LSTM_NLP_v3_TWITTER.hdf5', verbose=1, save_best_only=True)
+checkpointer = ModelCheckpoint(filepath='models/LSTM_NLP_v1_spacy.hdf5', verbose=1, save_best_only=True)
 reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.2,
                               patience=1, min_lr=0.001)
 early_stop = EarlyStopping(monitor='val_loss', patience = 3)
@@ -175,7 +130,7 @@ history = model.fit(X_train_sequences[:-500], y_train[:-500],
 X_test_sequences = [to_sequence(tokenize, preprocess, word2idx, x) for x in X_test]
 X_test_sequences = pad_sequences(X_test_sequences, maxlen=MAX_SEQ_LENGTH, value=N_FEATURES)
 
-model.load_weights('models/LSTM_NLP_v3_TWITTER.hdf5')
+model.load_weights('models/LSTM_NLP_v1_spacy.hdf5')
 scores = model.evaluate(X_test_sequences, y_test, verbose=1)
 print("Accuracy:", scores[1])  
 
