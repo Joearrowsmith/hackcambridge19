@@ -29,7 +29,7 @@ class Metrics(models.Model):
     productivity = models.FloatField()
     jounal_note = models.TextField()
 
-    def add(self, vals):
+    def add(vals):
         entry = Metrics.objects.create(
             entry_time = datetime.datetime.today(),
             anger = vals['anger'],
@@ -40,6 +40,7 @@ class Metrics(models.Model):
             productivity = vals['productivity'],
             jounal_note = vals['jounal_note']
         )
+        entry.save()
 
 class GraphOutput(models.Model):
     date = models.DateField()
