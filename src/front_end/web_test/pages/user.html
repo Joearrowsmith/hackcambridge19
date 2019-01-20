@@ -15,13 +15,43 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
   <link href="../assets/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
+  
+
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="../assets/demo/demo.css" rel="stylesheet" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  <!-- Tempus Dominus -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
 </head>
 
 <body class="">
   <div class="modal fade" id="blurModal" tabindex="-1" role="dialog" aria-labelledby="blurModalLabel">
     <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="entryModalLabel">This screen is currently locked.</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <p class="modal-body-text">
+            Enter password to unlock:
+          </p>
+          <form>
+            <div class="form-group">
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+              </div>
+          </form>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Enter</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="wrapper ">
@@ -32,7 +62,7 @@
         Tip 2: you can also add an image using data-image tag
     -->
         <div class="logo">
-          <a href="#" class="simple-text logo-normal">
+          <a href="./index.html" class="simple-text logo-normal">
             Journ.AI
           </a>
         </div>
@@ -55,7 +85,7 @@
             <li class="nav-item ">
               <a class="nav-link" href="./treatment.html">
                 <i class="material-icons">local_hospital</i>
-                <p>Ongoing Treatment</p>
+                <p>Ongoing Treatments</p>
               </a>
             </li>
             <li class="nav-item ">
@@ -226,7 +256,20 @@
                     </div>
                     <hr>
                     <h4>Ongoing Treatment Details</h4>
-                    <h6>Medication</h6>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <h6>Medication</h6>
+                      </div>
+                      <div class="col-md-1">
+                        <h6>Have</h6>
+                      </div>
+                      <div class="col-md-2">
+                        <h6>Every</h6>
+                      </div>
+                      <div class="col-md-2">
+                        <h6>At</h6>
+                      </div>
+                    </div>
                     <div class="row">
                       <div class="col-md-4">
                         <div class="form-group">
@@ -234,10 +277,11 @@
                           <input type="text" class="form-control">
                         </div>
                       </div>
-                      <div class="col-md-2">
+                      <div class="col-md-1">
+
                         <div class="form-group">
                               <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                <option selected>Amount</option>
+                                <option selected disabled></option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -253,13 +297,25 @@
                               </select>
                         </div>
                       </div>
-                      <div class="col-md-3">
+                      <div class="col-md-2">
                         <div class="form-group">
                               <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                <option selected>Frequency</option>
+                                <option selected disabled></option>
                                 <option value="1">Hour(s)</option>
                                 <option value="2">Day(s)</option>
                               </select>
+                        </div>
+                      </div>
+                      <div class="col-md-1">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">HH</label>
+                          <input type="text" class="form-control">
+                        </div>
+                    </div>
+                      <div class="col-md-1">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">MM</label>
+                          <input type="text" class="form-control">
                         </div>
                       </div>
                       <div class="col-md-3">
@@ -274,7 +330,17 @@
                         </button>
                       </div>
                     </div>
-                    <h6>Appointments</h6>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <h6>Appointments</h6>
+                      </div>
+                      <div class="col-md-1">
+                        <h6>Have</h6>
+                      </div>
+                      <div class="col-md-2">
+                        <h6>Every</h6>
+                      </div>
+                    </div>
                     <div class="row">
                       <div class="col-md-4">
                         <div class="form-group">
@@ -282,10 +348,11 @@
                           <input type="text" class="form-control">
                         </div>
                       </div>
-                      <div class="col-md-2">
+                      <div class="col-md-1">
+
                         <div class="form-group">
                               <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                <option selected>Amount</option>
+                                <option selected disabled></option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -301,17 +368,19 @@
                               </select>
                         </div>
                       </div>
-                      <div class="col-md-3">
+                      <div class="col-md-2">
                         <div class="form-group">
                               <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                <option selected>Frequency</option>
-                                <option value="1">Daily</option>
-                                <option value="2">Weekly</option>
-                                <option value="2">Monthly</option>
-                                <option value="2">Yearly</option>
+                                <option selected disabled></option>
+                                <option value="1">Day(s)</option>
+                                <option value="2">Week(s)</option>
+                                <option value="2">Month(s)</option>
                               </select>
                         </div>
                       </div>
+                      <div class="col-md-2">
+
+                    </div>
                       <div class="col-md-3">
                         <button type="button" rel="tooltip" title="Edit" class="btn btn-primary btn-link btn-sm">
                           <i class="material-icons">edit</i>
@@ -459,7 +528,7 @@
   <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
   <!-- Plugin for the momentJs  -->
-  <script src="../assets/js/plugins/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js"></script>
   <!--  Plugin for Sweet Alert -->
   <script src="../assets/js/plugins/sweetalert2.js"></script>
   <!-- Forms Validations Plugin -->

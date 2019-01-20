@@ -71,14 +71,14 @@
               </a>
             </li>
 
-            <li class="nav-item ">
-              <a class="nav-link" href="./treatment.html">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">
                 <i class="material-icons">local_hospital</i>
                 <p>Ongoing Treatments</p>
               </a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="#">
+            <li class="nav-item ">
+              <a class="nav-link" href="./help.html">
                 <i class="material-icons">warning</i>
                 <p>Seek Urgent Help</p>
               </a>
@@ -97,7 +97,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="#pablo">Seek Urgent Help</a>
+            <a class="navbar-brand" href="#pablo">Ongoing Treatments</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -131,36 +131,70 @@
       <div class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-lg-6 col-md-12">
               <div class="card">
-                <div class="card-header card-header-danger">
-                  <h4 class="card-title">Emergency Message</h4>
-                  <p class="card-category">Send an email to your emergency contact(s)</p>
+                <div class="card-header card-header-info">
+                  <h4 class="card-title">Medications</h4>
+                  <p class="card-category">List of current medications</p>
                 </div>
-                <div class="card-body">
-                  <form>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Subject</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <label>Message</label>
-                          <div class="form-group">
-                            <label class="bmd-label-floating">This will be sent to your emergency contact(s).</label>
-                            <textarea class="form-control" rows="10"></textarea>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <button type="submit" class="btn btn-danger pull-right">Send</button>
-                    <div class="clearfix"></div>
-                  </form>
+                <div class="card-body table-responsive">
+                  <table class="table table-hover">
+                    <thead class="text-info">
+                      <th>Name</th>
+                      <th>Amount</th>
+                      <th>Frequency</th>
+                      <th>Time</th>
+                      <th>Taken?</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Fluoxetine (Prozac)</td>
+                        <td>1</td>
+                        <td>Daily</td>
+                        <td>08:00</td>
+                        <td><input type="checkbox" name="name1" /></td>
+                      </tr>
+                      <tr>
+                        <td>Zopiclone</td>
+                        <td>1</td>
+                        <td>Daily</td>
+                        <td>22:00</td>
+                        <td><input type="checkbox" name="name1" /></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="card">
+                <div class="card-header card-header-success">
+                  <h4 class="card-title">Appointments</h4>
+                  <p class="card-category">List of appointments</p>
+                </div>
+                <div class="card-body table-responsive">
+                  <table class="table table-hover">
+                    <thead class="text-success">
+                      <th>Name</th>
+                      <th>Amount</th>
+                      <th>Frequency</th>
+                      <th>Completed?</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Dr Apple</td>
+                        <td>1</td>
+                        <td>Monthly</td>
+                        <td><input type="checkbox" name="name1" /></td>
+                      </tr>
+                      <tr>
+                        <td>Dr Pear</td>
+                        <td>1</td>
+                        <td>Weekly</td>
+                        <td><input type="checkbox" name="name1" /></td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
