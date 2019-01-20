@@ -138,27 +138,51 @@
                   <p class="card-category">Send an email to your emergency contact(s)</p>
                 </div>
                 <div class="card-body">
-                  <form>
-                    <div class="row">
+
+                  <form class="gform pure-form pure-form-stacked" method="POST" data-email="edward.stables1198@gmail.com" action="https://script.google.com/macros/s/AKfycbzQMUH81Vf_mOCFarNArjV2fsAR6bLTnDII8JMPQU70ytnuPDdC/exec">
+                    <div class="form-elements">
+                          <div class="form-elements">
+                            <div class="row">
+                              <div class="col-md-12">
+                                <fieldset class="pure-group">
+                                  <label for="message">Message: </label>
+                                  <br/>
+                                  <textarea id="message" name="message" rows="10"></textarea>
+                                </fieldset>
+                              </div>
+                            </div>
+
+
+
+                                <fieldset class="pure-group">
+                                  <label for="email">Your Email Address:</label>
+                                  <input id="email" name="email" type="email" value=""
+                                  required/>
+                                  <span class="email-invalid" style="display:none">
+                                    Must be a valid email address</span>
+                                </fieldset>
+                                <button type="submit" class="btn btn-danger pull-right  pure-button">Send</button>
+                              </div>
+<!--                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="bmd-label-floating">Subject</label>
                           <input type="text" class="form-control">
                         </div>
                       </div>
-                    </div>
-                    <div class="row">
+                    </div> -->
+<!--                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label>Message</label>
+                          <label for="message">Message</label>
                           <div class="form-group">
                             <label class="bmd-label-floating">This will be sent to your emergency contact(s).</label>
-                            <textarea class="form-control" rows="10"></textarea>
+                            <textarea id="message" name="message" class="form-control" rows="10"></textarea>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <button type="submit" class="btn btn-danger pull-right">Send</button>
+                    </div> -->
+                    
                     <div class="clearfix"></div>
                   </form>
                 </div>
@@ -419,6 +443,8 @@
       });
     });
   </script>
+  <script data-cfasync="false" type="text/javascript"
+  src="https://cdn.rawgit.com/dwyl/html-form-send-email-via-google-script-without-server/master/form-submission-handler.js"></script>
 </body>
 
 </html>
