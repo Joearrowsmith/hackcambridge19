@@ -6,6 +6,7 @@ from mainService.graph_helper import get_user, get_calendar_events
 import dateutil.parser
 
 from .forms import NameForm, JournalForm
+from models import Metrics, GraphOutput
 # Create your views here.
 
 def user_page(request):
@@ -24,7 +25,9 @@ def main_page(request):
         if key not in  ['csrfmiddlewaretoken', 'metric_submission']:
           data_list[key] = val
       print(data_list)
+      Metrics.add(data_list)
   context = initialize_context(request)
+  graph_labels = 
   return render(request, 'mainService/index.html', context)
 
 

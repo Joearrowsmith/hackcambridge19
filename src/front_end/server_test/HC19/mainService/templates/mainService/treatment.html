@@ -31,9 +31,9 @@
           <p class="modal-body-text">
             Enter password to unlock:
           </p>
-          <form>
+          <form name="passwordWindow">
             <div class="form-group">
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <input name="passwordEnter" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
               </div>
           </form>
           <div class="modal-footer">
@@ -106,9 +106,6 @@
             <span class="navbar-toggler-icon icon-bar"></span>
           </button>
           <div class="collapse navbar-collapse justify-content-end">
-            <form class="navbar-form">
-
-            </form>
             <ul class="navbar-nav">
               <li class="nav-item dropdown">
                 <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -152,14 +149,14 @@
                         <td>1</td>
                         <td>Daily</td>
                         <td>08:00</td>
-                        <td><input type="checkbox" name="name1" /></td>
+                        <td><input name="medCheck1" type="checkbox" name="name1" /></td>
                       </tr>
                       <tr>
                         <td>Zopiclone</td>
                         <td>1</td>
                         <td>Daily</td>
                         <td>22:00</td>
-                        <td><input type="checkbox" name="name1" /></td>
+                        <td><input name="medCheck2" type="checkbox" name="name1" /></td>
                       </tr>
                     </tbody>
                   </table>
@@ -185,13 +182,13 @@
                         <td>Dr Apple</td>
                         <td>1</td>
                         <td>Monthly</td>
-                        <td><input type="checkbox" name="name1" /></td>
+                        <td><input name="apptCheck1" type="checkbox" name="name1" /></td>
                       </tr>
                       <tr>
                         <td>Dr Pear</td>
                         <td>1</td>
                         <td>Weekly</td>
-                        <td><input type="checkbox" name="name1" /></td>
+                        <td><input name="apptCheck2" type="checkbox" name="name1" /></td>
                       </tr>
                     </tbody>
                   </table>
