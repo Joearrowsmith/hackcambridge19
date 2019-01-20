@@ -11,9 +11,11 @@ Team members:
 
 ## User Experience
 
+
+
 ![Dashboard](misc/bashboard1.png)
 
-![Dashboard](misc/kpi-journal-entry-graph.png)
+![Journal Graph](misc/kpi-journal-entry-graph.png)
 
 ![User Profile](misc/profile1.png)
 
@@ -23,7 +25,7 @@ Team members:
 
 ![Help](misc/help.png)
 
-![Password](misc/bashboard1.png)
+![Password](misc/password.png)
 
 ## Backend Framework:
 
@@ -33,9 +35,16 @@ The backend was programmed using the django framework. Django serves the user a 
 
 ## Prediction Models:
 
+A deep-learning based Natural Language Processing model was built for the automatic recognition of emotion from the journal entry of the user. The emotion variables, along with the user's calendar and health data, are used to calculate the Key Performance Index (KPI).
+
 ![LSTM performance](misc/LSTM_performance.png)
 
 ![LSTM ensemble](misc/LSTM_performance_ensemble.png)
 
 ![Confusion Matrix](misc/confusion_matrix_spacy.png)
 
+## Results
+
+
+
+## Moving Forward
