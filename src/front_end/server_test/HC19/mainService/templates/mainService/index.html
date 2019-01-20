@@ -2,7 +2,7 @@
 <html lang="en">
 
 
-{% load static %}  
+{% load static %}
 <head>
   <meta charset="utf-8" />
   <link rel="apple-touch-icon" sizes="76x76" href="{% static 'mainService/assets/img/apple-icon.png' %}">
@@ -106,7 +106,7 @@
 </head>
 
 <body>
-  
+
     <div class="modal fade" id="blurModal" tabindex="-1" role="dialog" aria-labelledby="blurModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -396,9 +396,9 @@
                           </div>
                           <div class="col-md-6">
                             <div class="form-group">
-                              <label>Disgust</label>
+                              <label>Fear</label>
                               <div class="form-group">
-                                <input type="range" name = "disgust" class="custom-range" min="0" max="100" value="0" step="0">
+                                <input type="range" name = "fear" class="custom-range" min="0" max="100" value="0" step="0">
                               </div>
                             </div>
                           </div>
@@ -422,10 +422,10 @@
                           </div>
                         </div>
                       <input type="submit" name="metric_submission", values = "Journal Entry">
-                      
+
                       <div class="clearfix"></div>
                     </form>
-                  
+
                 </div>
               </div>
             </div>
@@ -451,7 +451,7 @@
                 <div class="card-body card-chart">
                   <canvas id="myChart"></canvas>
 
-                  
+
 
 
                   <script>
@@ -479,7 +479,7 @@
                                     borderWidth: 1
                                 }]
                             },
-                            options: {  
+                            options: {
                                 responsive: true,
                                 maintainAspectRatio: false,
                                 legend: {
@@ -590,7 +590,7 @@
     <script src="{% static 'mainService/assets/js/plugins/bootstrap-notify.js' %}"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{% static 'mainService/assets/js/material-dashboard.js?v=2.1.1' %}" type="text/javascript"></script>
-    
+
   <script>
     $(document).ready(function() {
       $().ready(function() {
@@ -768,7 +768,7 @@
       md.initDashboardPageCharts();
 
     });
-  </script>  
+  </script>
 </body>
 
 </html>
