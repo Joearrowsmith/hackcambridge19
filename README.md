@@ -61,7 +61,7 @@ Results from twitter affective computing: 58.14% on test, current state-of-art i
 
 ### Affective Computing Results
 
-![Confusion Matrix](misc/confusion_matrix_twitter.png)
+![Confusion Matrix](misc/confusion_matrix_ensemble.png)
 
 
 ## Moving Forward with Frontend
