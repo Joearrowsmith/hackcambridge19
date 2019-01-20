@@ -55,13 +55,13 @@ A deep-learning based Natural Language Processing model was built for the automa
 Results from twitter affective computing: 58.14% on test, current state-of-art is 57.7% +/- 6.3% with pretrained word embedding. Source: https://www.sciencedirect.com/science/article/pii/S0167923618301519#bb0435
 
 
-### Optimal LSTM performance
+### LSTM Training performance
 
 ![LSTM performance](misc/LSTM_performance.png)
 
 ### Affective Computing Results
 
-![Confusion Matrix](misc/confusion_matrix_spacy.png)
+![Confusion Matrix](misc/confusion_matrix_twitter.png)
 
 
 ## Moving Forward with Frontend
