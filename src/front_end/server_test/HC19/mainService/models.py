@@ -1,5 +1,5 @@
 from django.db import models
-
+import datetime
 # Create your models here.
 
 """
@@ -25,10 +25,30 @@ class Metrics(models.Model):
     sadness = models.FloatField()
     happiness = models.FloatField()
     fear = models.FloatField()
-    disgust = models.FloatField()
     stress = models.FloatField()
     productivity = models.FloatField()
     jounal_note = models.TextField()
+
+    def add(self, vals):
+        entry = Metrics.objects.create(
+            entry_time = datetime.datetime.today(),
+            anger = vals['anger'],
+            sadness = vals['sadness'],
+            happiness = vals['happiness'],
+            fear = vals['fear'],
+            stress = vals['stress'],
+            productivity = vals['productivity'],
+            jounal_note = vals['jounal_note']
+        )
+
+class GraphOutput(models.Model):
+    date = models.DateField()
+    kpi = models.FloatField()
+    journal = models.TextField(max_length=500)
+
+    def populate(self, parameter_list):
+        current_date = datetime.datetime.today()
+        latest = Metrics.objects.filter(testfield=12).order_by('-id')[0]
 
 class Calender(models.Model):
     duration = models.DurationField()

@@ -33,7 +33,13 @@
   width:100%; /* sample value - set it as you like*/
 }
 
-
+body.modal-open .wrapper{
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+     filter: blur(10px);
+}
 
 .card {
   font-size: .875rem;
