@@ -1,6 +1,6 @@
 env/*
 .vscode/*
 *.txt
-.ipynb_checkpoints/*
+*/.ipynb_checkpoints/*
 *.yml
 *.hdf5
