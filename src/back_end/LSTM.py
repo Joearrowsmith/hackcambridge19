@@ -1,7 +1,6 @@
 from py_isear.isear_loader import IsearLoader
 import numpy as np
 import itertools
-from preprocess import clean_data
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
@@ -23,14 +22,6 @@ text_data_set = dataset.get_freetext_content()
 target_set = np.asarray(dataset.get_target())
 target_chain = itertools.chain(*target_set)
 target_data = np.asarray(list(target_chain))
-
-#target_data = target_data[np.where(target_data != 5)]
-#target_data = target_data[np.where(target_data != 6)]
-#target_data = target_data[np.where(target_data != 7)]
-
-#text_data_set = text_data_set[np.where(target_data != 5)]
-#text_data_set = text_data_set[np.where(target_data != 6)]
-#text_data_set = text_data_set[np.where(target_data != 7)]
 
 # One-hot encoding of target values
 target_data = np_utils.to_categorical(target_data)
@@ -93,23 +84,6 @@ def f1(y_true, y_pred):
     recall = recall(y_true, y_pred)
     return 2*((precision*recall)/(precision+recall+K.epsilon()))
 
-"""
-import spacy
-
-nlp = spacy.load('en_core_web_md')
- 
-EMBEDDINGS_LEN = len(nlp.vocab['apple'].vector)
-print("EMBEDDINGS_LEN=", EMBEDDINGS_LEN)  # 300
- 
-embeddings_index = np.zeros((len(vectorizer.get_feature_names()) + 1, EMBEDDINGS_LEN))
-for word, idx in word2idx.items():
-    try:
-        embedding = nlp.vocab[word].vector
-        embeddings_index[idx] = embedding
-    except:
-        pass
-"""
-
 #load 550 million tweets trained embedding space 
 GLOVE_PATH = 'data/ntua_twitter_affect_310.txt'
 GLOVE_VECTOR_LENGTH = 310
@@ -142,19 +116,11 @@ from keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLROnPlateau
 import keras.backend as K
  
 model = Sequential()
-"""
-model.add(Embedding(len(vectorizer.get_feature_names()) + 1,
-                    EMBEDDINGS_LEN,
-                    weights = [embeddings_index],
-                    input_length=MAX_SEQ_LENGTH,
-                    trainable = False))
-"""
 model.add(Embedding(len(vectorizer.get_feature_names()) + 1,
                     GLOVE_VECTOR_LENGTH,  # Embedding size
                     weights=[embeddings_index],
                     input_length=MAX_SEQ_LENGTH,
                     trainable=False))
-#model.add(CuDNNLSTM(EMBEDDINGS_LEN))
 model.add(CuDNNLSTM(GLOVE_VECTOR_LENGTH))
 model.add(Dense(units=7, activation='softmax'))
  
@@ -167,10 +133,10 @@ reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.2,
 early_stop = EarlyStopping(monitor='val_loss', patience = 3)
 
 history = model.fit(X_train_sequences[:-500], y_train[:-500], 
-              epochs=8, batch_size=32, verbose=1, 
+              epochs=10, batch_size=32, verbose=1, 
               validation_data=(X_train_sequences[-500:], y_train[-500:]),
               shuffle = True,
-              callbacks = [checkpointer, reduce_lr, early_stop])
+              callbacks = [checkpointer, reduce_lr, checkpointer])
 
 X_test_sequences = [to_sequence(tokenize, preprocess, word2idx, x) for x in X_test]
 X_test_sequences = pad_sequences(X_test_sequences, maxlen=MAX_SEQ_LENGTH, value=N_FEATURES)
@@ -184,17 +150,15 @@ y_pred = model.predict(X_test_sequences)
 matrix = confusion_matrix(y_test.argmax(axis=1), y_pred.argmax(axis=1))
 
 def plot_train_history_accuracy(history):
-    # summarize history for loss
+    # summarize history for accuracy and loss
     plt.plot(history.history['acc'])
     plt.plot(history.history['val_acc'])
-    plt.plot(history.history['f1'])
-    plt.plot(history.history['val_f1'])
     plt.plot(history.history['loss'])
     plt.plot(history.history['val_loss'])
     plt.title('model accuracy')
-    plt.ylabel('accuracy')
+    plt.ylabel('accuracy/loss')
     plt.xlabel('epoch')
-    plt.legend(['train', 'test', 'f1', 'val_f1', 'loss', 'val_loss'], loc='upper right')
+    plt.legend(['train', 'test', 'loss', 'val_loss'], loc='upper right')
     plt.show()
 
 plot_train_history_accuracy(history)
