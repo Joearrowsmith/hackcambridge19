@@ -151,7 +151,7 @@ model.add(Dense(units=7, activation='softmax'))
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy', f1])
 model.summary()
 
-checkpointer = ModelCheckpoint(filepath='LSTM_NLP_v2_TWITTER.hdf5', verbose=1, save_best_only=True)
+checkpointer = ModelCheckpoint(filepath='models/LSTM_NLP_v2_TWITTER.hdf5', verbose=1, save_best_only=True)
 #reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.2,
                               #patience=3, min_lr=0.001)
 early_stop = EarlyStopping(monitor='val_loss', patience = 3)
@@ -165,7 +165,7 @@ history = model.fit(X_train_sequences[:-300], y_train[:-300],
 X_test_sequences = [to_sequence(tokenize, preprocess, word2idx, x) for x in X_test]
 X_test_sequences = pad_sequences(X_test_sequences, maxlen=MAX_SEQ_LENGTH, value=N_FEATURES)
 
-model.load_weights('LSTM_NLP_v2_TWITTER.hdf5')
+model.load_weights('models/LSTM_NLP_v2_TWITTER.hdf5')
 scores = model.evaluate(X_test_sequences, y_test, verbose=1)
 print("Accuracy:", scores[1])  
 
