@@ -57,10 +57,6 @@ A deep-learning based Natural Language Processing model was built for the automa
 
 ![LSTM performance](misc/LSTM_performance.png)
 
-### Result from trial of an ensemble performance
-
-![LSTM ensemble](misc/LSTM_performance_ensemble.png)
-
 
 ## Results
 
