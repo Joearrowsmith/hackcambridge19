@@ -29,7 +29,14 @@ def get_day_statuses(df):
         if not day == None:
             if day != current:
                 ## new day, save old state
-                history.append(state)
+                if state != {}:
+                    history.append([state['date'], 
+                                    state['first'],
+                                    state['last'],
+                                    state['duration'],
+                                    state['text'],
+                                    state['allDay'],
+                                    state['count']])
                 state = {}
                 state['date'] = current
                 state['first'] = row['start'].time()
@@ -40,6 +47,7 @@ def get_day_statuses(df):
                 state['allDay'] = row['isAllDay']
                 state['count'] = 1
             else:
+                state['date'] = current
                 if state['first'] > row['start'].time():
                     state['first'] = row['start'].time()
                 if state['last'] < row['end'].time():
@@ -54,17 +62,28 @@ def get_day_statuses(df):
     return history
     
 if __name__=='__main__':
-    df = pd.read_csv('data/calendar_data.csv')
-
-    df['start'] = pd.to_datetime(df['start'])
-    df['end'] = pd.to_datetime(df['end'])
-  
-    df['subject'] = df['subject'].apply(clean_data)
-    df['recurrence'] = df['recurrence'].apply(clean_recurrence)
+    df_cal = pd.read_csv('data/calendar_data.csv')
+    df_cal['start'] = pd.to_datetime(df_cal['start'])
+    df_cal['idx'] = df_cal['start']
+    df_cal = df_cal.set_index('idx')
+    df_cal['end'] = pd.to_datetime(df_cal['end'])
+    df_cal['subject'] = df_cal['subject'].apply(clean_data)
+    df_cal['recurrence'] = df_cal['recurrence'].apply(clean_recurrence)
    
     
-    history = get_day_statuses(df)
+    df_ener = pd.read_csv('data/ActiveEnergyBurned.csv')
+    df_ener = df_ener.drop(['Unnamed: 0'], axis=1)
+    df_ener['endDate'] = pd.to_datetime(df_ener['endDate'])
+    df_ener = df_ener.set_index("endDate")
+    df_ener = df_ener.resample('D').sum()
     
-    for i in history[-10:]:
-        print(i)
-        print('---')
+    history = get_day_statuses(df_cal)
+    
+    df_hist = pd.DataFrame(history, columns=['date','first','last','duration','text','allDay','count'])
+    df_hist['date'] = pd.to_datetime(df_hist['date'])
+    df_hist = df_hist.set_index('date')
+    df_hist = df_hist.join(df_ener)
+    
+    
+    
+    
