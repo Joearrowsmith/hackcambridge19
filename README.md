@@ -44,23 +44,24 @@ The frontend was built upon an MIT licensed bootstrap template, whereby a calend
 
 The backend was programmed using the django framework. Django serves the user a preset page template depending on their url, as well as making database interactions quick and easy. The database was setup to contain the information viewed by the webapp user, as well as the information needed for the machine learning models. Due to some issues with getting data from the user, there wasn't time to fully integrate the UI with the database information, but a small amount more work to integrate these will give the webapp full functionality.
 
-### Affective Computing Results
-
-![Confusion Matrix](misc/confusion_matrix_spacy.png)
 
 ## Prediction Models:
 
 A deep-learning based Natural Language Processing model was built for the automatic recognition of emotion from the journal entry of the user. The emotion variables, along with the user's calendar and health data, are used to calculate the Key Performance Index (KPI). Due to limited number of training examples, we used a pretrained work embedded that was trained on 550 million English tweets. Source: https://github.com/cbaziotis/ntua-slp-semeval2018
 
 
+## Results
+
+Results from twitter affective computing: 58.14% on test, current state-of-art is 57.7% +/- 6.3% with pretrained word embedding. Source: https://www.sciencedirect.com/science/article/pii/S0167923618301519#bb0435
+
+
 ### Optimal LSTM performance
 
 ![LSTM performance](misc/LSTM_performance.png)
 
+### Affective Computing Results
 
-## Results
-
-Results from twitter affective computing: 58.14% on test, current state-of-art is 57.7% +/- 6.3% with pretrained word embedding. Source: https://www.sciencedirect.com/science/article/pii/S0167923618301519#bb0435
+![Confusion Matrix](misc/confusion_matrix_spacy.png)
 
 
 ## Moving Forward with Frontend
