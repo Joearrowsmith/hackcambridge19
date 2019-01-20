@@ -11,9 +11,9 @@ Team members:
 
 ## User Experience
 
+The frontend was built upon an MIT licensed bootstrap template, whereby a calendar, journal entry, mood chart, emergency email and hide current screen functionalities were implemented. The overall layout and design of these components were formulated with the user's privacy as one of the most important aspects, due to the sensitive nature of mental health. For instance, the initial dashboard is reminiscent of the usual productivity application with the mood chart accessible by scrolling down.  The hide screen feature was also incorporated for cases where the user feels the need to keep his dashboard hidden from those around him, until it is unlocked by the user himself with a password (we did not manage to implement the password unlocking feature). The email functionality was designed with the idea of having an auto filled message body which would have been set by the user beforehand for use in cases whereby the user wants to contact their emergency contact persons but may not feel well enough to be able to type out that they are unwell. The ongoing treatments page allows the user to have a quick checklist of their necessary medications or appointments, facilitating their healing process. In the user profile, the user can set a personal message to themselves which will be shown whenever they are on that page.
 
-
-![Dashboard](misc/bashboard1.png)
+![Dashboard](misc/dashboard1.png)
 
 ![Journal Graph](misc/kpi-journal-entry-graph.png)
 
