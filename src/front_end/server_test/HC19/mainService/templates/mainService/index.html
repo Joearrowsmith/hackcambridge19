@@ -128,25 +128,25 @@
           </li>
           <!-- your sidebar here -->
           <li class="nav-item ">
-            <a class="nav-link" href="./user.html">
+            <a class="nav-link" href="user">
               <i class="material-icons">person</i>
               <p>User Profile</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./treatment.html">
+            <a class="nav-link" href="treatment">
               <i class="material-icons">local_hospital</i>
               <p>Ongoing Treatment</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./help.html">
+            <a class="nav-link" href="help">
               <i class="material-icons">warning</i>
               <p>Seek Urgent Help</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./hide.html">
+            <a class="nav-link" href="hide">
               <i class="material-icons">https</i>
               <p>Hide Dashboard</p>
             </a>
@@ -333,14 +333,15 @@
                   <p class="card-category">Make a record of today</p>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form method="post", id="metric_form">
+                        {% csrf_token %}
                         <div class="row">
                           <div class="col-md-12">
                             <div class="form-group">
                               <label>What happened today?</label>
                               <div class="form-group">
                                 <label class="bmd-label-floating">Write about it here.</label>
-                                <textarea class="form-control" rows="4"></textarea>
+                                <textarea name="jounal_note" class="form-control" rows="4"></textarea>
                               </div>
                             </div>
                           </div>
@@ -359,7 +360,7 @@
                             <div class="form-group">
                               <label>Happiness</label>
                               <div class="form-group">
-                                <input type="range" class="custom-range" min="0" max="100" value="0" step="0">
+                                <input type="range" name = "happiness" class="custom-range" min="0" max="100" value="0" step="0">
                               </div>
                             </div>
                           </div>
@@ -367,7 +368,7 @@
                             <div class="form-group">
                               <label>Sadness</label>
                               <div class="form-group">
-                                <input type="range" class="custom-range" min="0" max="100" value="0" step="0">
+                                <input type="range" name = "sadness" class="custom-range" min="0" max="100" value="0" step="0">
                               </div>
                             </div>
                           </div>
@@ -377,7 +378,7 @@
                             <div class="form-group">
                               <label>Anger</label>
                               <div class="form-group">
-                                <input type="range" class="custom-range" min="0" max="100" value="0" step="0">
+                                <input type="range" name = "anger" class="custom-range" min="0" max="100" value="0" step="0">
                               </div>
                             </div>
                           </div>
@@ -385,7 +386,7 @@
                             <div class="form-group">
                               <label>Disgust</label>
                               <div class="form-group">
-                                <input type="range" class="custom-range" min="0" max="100" value="0" step="0">
+                                <input type="range" name = "disgust" class="custom-range" min="0" max="100" value="0" step="0">
                               </div>
                             </div>
                           </div>
@@ -395,7 +396,7 @@
                             <div class="form-group">
                               <label>Productivity</label>
                               <div class="form-group">
-                                <input type="range" class="custom-range" min="0" max="100" value="0" step="0">
+                                <input type="range" name = "productivity" class="custom-range" min="0" max="100" value="0" step="0">
                               </div>
                             </div>
                           </div>
@@ -403,14 +404,15 @@
                             <div class="form-group">
                               <label>Stress</label>
                               <div class="form-group">
-                                <input type="range" class="custom-range" min="0" max="100" value="0" step="0">
+                                <input type="range" name ="stress" class="custom-range" min="0" max="100" value="0" step="0">
                               </div>
                             </div>
                           </div>
                         </div>
-                        <button type="submit" class="btn btn-danger pull-right">Update Journal</button>
-                        <div class="clearfix"></div>
-                      </form>
+                      <input type="submit" name="metric_submission", values = "Journal Entry">
+                      
+                      <div class="clearfix"></div>
+                    </form>
                   
                 </div>
               </div>

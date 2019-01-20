@@ -12,15 +12,107 @@
         <link rel="stylesheet" href="">
     </head>
     <body>
-
         <a href="{% url 'signin' %}" class="nav-link">Sign In</a>
-
-        <form action="../tester/" method="post">
+        <!--
+        <form action="" method="post">
             {% csrf_token %}
             {{ form }}
             <input type="submit" value="Submit">
         </form>
+        
+        
+        
 
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form1 }}
+            <input type="submit" value="Submit">
+        </form>-->
+
+
+        <div class="card-body">
+            <form method="post", id="metric_form">
+                {% csrf_token %}
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>What happened today?</label>
+                      <div class="form-group">
+                        <label class="bmd-label-floating">Write about it here.</label>
+                        <textarea name="jounal_note" class="form-control" rows="4"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>What is your current level of...</label>
+                      <br />
+                      <label style="font-size: 0.7rem;">(From zero to maximum desired level)</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Happiness</label>
+                      <div class="form-group">
+                        <input type="range" name = "happiness" class="custom-range" min="0" max="100" value="0" step="0">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Sadness</label>
+                      <div class="form-group">
+                        <input type="range" name = "sadness" class="custom-range" min="0" max="100" value="0" step="0">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Anger</label>
+                      <div class="form-group">
+                        <input type="range" name = "anger" class="custom-range" min="0" max="100" value="0" step="0">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Disgust</label>
+                      <div class="form-group">
+                        <input type="range" name = "disgust" class="custom-range" min="0" max="100" value="0" step="0">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Productivity</label>
+                      <div class="form-group">
+                        <input type="range" name = "productivity" class="custom-range" min="0" max="100" value="0" step="0">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Stress</label>
+                      <div class="form-group">
+                        <input type="range" name ="stress" class="custom-range" min="0" max="100" value="0" step="0">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <input type="submit" name="metric_submission", values = "Journal Entry">
+              
+              <div class="clearfix"></div>
+            </form>
+          
+        </div>
         <script src="" async defer></script>
     </body>
 </html>
