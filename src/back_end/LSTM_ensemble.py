@@ -28,7 +28,7 @@ target_data = target_data[:,1:]
 
 X_train, X_test, y_train, y_test = train_test_split(text_data_set, target_data, test_size = 0.2, shuffle = False)
 
-vectorizer = CountVectorizer(strip_accents = 'ascii', lowercase = True, max_features = 6000)
+vectorizer = CountVectorizer(strip_accents = 'ascii', lowercase = True, max_features = 7500)
 X_train_onehot = vectorizer.fit_transform(X_train)
 
 word2idx = {word: idx for idx, word in enumerate(vectorizer.get_feature_names())}
@@ -154,7 +154,7 @@ reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.2,
 early_stop = EarlyStopping(monitor='val_loss', patience = 3)
 
 history = model.fit(X_train_sequences[:-500], y_train[:-500], 
-              epochs=8, batch_size=32, verbose=1, 
+              epochs=10, batch_size=32, verbose=1, 
               validation_data=(X_train_sequences[-500:], y_train[-500:]),
               shuffle = True,
               callbacks = [checkpointer, reduce_lr, early_stop])
@@ -174,14 +174,12 @@ def plot_train_history_accuracy(history):
     # summarize history for loss
     plt.plot(history.history['acc'])
     plt.plot(history.history['val_acc'])
-    plt.plot(history.history['f1'])
-    plt.plot(history.history['val_f1'])
     plt.plot(history.history['loss'])
     plt.plot(history.history['val_loss'])
     plt.title('model accuracy')
     plt.ylabel('accuracy')
     plt.xlabel('epoch')
-    plt.legend(['train', 'test', 'f1', 'val_f1', 'loss', 'val_loss'], loc='upper right')
+    plt.legend(['train', 'test', 'loss', 'val_loss'], loc='upper right')
     plt.show()
 
 plot_train_history_accuracy(history)
