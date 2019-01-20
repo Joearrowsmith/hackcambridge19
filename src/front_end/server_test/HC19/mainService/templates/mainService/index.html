@@ -458,15 +458,17 @@
 
                     $(document).ready(
                       function() {
+                        var xPoints = {{ xPoints|safe }};
+                        var yPoints = {{ yPoints|safe }};
                         var canvas = document.getElementById("myChart");
                         var ctx = canvas.getContext("2d");
                         var myNewChart = new Chart(ctx, {
                             type: 'line',
                             data: {
-                                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                                labels: xPoints,
                                 datasets: [{
                                     label: 'Mood Index',
-                                    data: [12, 19, 3, 5, 2, 3],
+                                    data: yPoints,
                                     fill: false,
                                     pointRadius: 10,
                                     pointBorderColor: 'rgba(0, 0, 0, 0)',

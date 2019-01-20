@@ -31,7 +31,7 @@ class Metrics(models.Model):
 
     def add(vals):
         entry = Metrics.objects.create(
-            entry_time = datetime.datetime.today(),
+            entry_time = datetime.datetime.utcnow().date(),
             anger = vals['anger'],
             sadness = vals['sadness'],
             happiness = vals['happiness'],
@@ -47,9 +47,11 @@ class GraphOutput(models.Model):
     kpi = models.FloatField()
     journal = models.TextField(max_length=500)
 
-    def populate(self, parameter_list):
-        current_date = datetime.datetime.today()
-        latest = Metrics.objects.filter(testfield=12).order_by('-id')[0]
+    def populate():
+        print('populate called')
+        current_date = datetime.datetime.utcnow().date()
+        latest = Metrics.objects.filter(entry_time = current_date)[-1]
+        print(latest)
 
 class Calender(models.Model):
     duration = models.DurationField()

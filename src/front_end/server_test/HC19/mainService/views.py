@@ -17,6 +17,12 @@ def help_page(request):
   return render(request, 'mainService/help.html')
 
 def main_page(request):
+  """
+  try:
+    GraphOutput.populate()
+  except:
+    print("didn't work")
+  """
   if request.method == 'POST':
     if 'metric_submission' in request.POST:
       print("Journal Entry Made:")
@@ -27,6 +33,8 @@ def main_page(request):
       print(data_list)
       Metrics.add(data_list)
   context = initialize_context(request)
+  context['xPoints'] = list(range(1,31))
+  context['yPoints'] = [12, 19, 3, 5, 2, 3, 12, 19, 3, 5, 2, 3,12, 19, 3, 5, 2, 3,12, 19, 3, 5, 2, 3,12, 19, 3, 5, 2, 3]
 
   return render(request, 'mainService/index.html', context)
 
