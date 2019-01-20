@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
 
 from keras.utils import np_utils
+import keras.backend as K
 from nltk.corpus import stopwords
 
 data = ['TEMPER', 'TROPHO']
@@ -15,8 +16,6 @@ dataset = loader.load_isear('data/isear.csv')
 
 #load the text data and clean it
 text_data_set = dataset.get_freetext_content()
-#text_data_set = np.asarray(text_data_set)
-#text_data_set = clean_data(text_data_set)
 
 #load the target emotion classes 
 target_set = np.asarray(dataset.get_target())
@@ -29,8 +28,7 @@ target_data = target_data[:,1:]
 
 X_train, X_test, y_train, y_test = train_test_split(text_data_set, target_data, test_size = 0.2, shuffle = False)
 
-vectorizer = CountVectorizer(strip_accents = 'ascii', lowercase = True, max_features = 6000)
-#vectorizer = TfidfVectorizer(strip_accents = 'ascii', lowercase = True, max_features = 6000)
+vectorizer = CountVectorizer(strip_accents = 'ascii', lowercase = True, max_features = 7500)
 X_train_onehot = vectorizer.fit_transform(X_train)
 
 word2idx = {word: idx for idx, word in enumerate(vectorizer.get_feature_names())}
@@ -84,16 +82,15 @@ def f1(y_true, y_pred):
     recall = recall(y_true, y_pred)
     return 2*((precision*recall)/(precision+recall+K.epsilon()))
 
-#load 550 million tweets trained embedding space 
 GLOVE_PATH = 'data/ntua_twitter_affect_310.txt'
 GLOVE_VECTOR_LENGTH = 310
 
-def read_glove_vectors(path, lenght):
+def read_glove_vectors(path, length):
     embeddings = {}
     with open(path, encoding="utf8") as glove_f:
         for line in glove_f:
             chunks = line.split()
-            assert len(chunks) == lenght + 1
+            assert len(chunks) == length + 1
             embeddings[chunks[0]] = np.array(chunks[1:], dtype='float32')
  
     return embeddings
@@ -101,33 +98,57 @@ def read_glove_vectors(path, lenght):
 GLOVE_INDEX = read_glove_vectors(GLOVE_PATH, GLOVE_VECTOR_LENGTH)
  
 # Init the embeddings layer with GloVe embeddings
-embeddings_index = np.zeros((len(vectorizer.get_feature_names()) + 1, GLOVE_VECTOR_LENGTH))
+embeddings_index1 = np.zeros((len(vectorizer.get_feature_names()) + 1, GLOVE_VECTOR_LENGTH))
 for word, idx in word2idx.items():
     try:
-        embedding = GLOVE_INDEX[word]
-        embeddings_index[idx] = embedding
+        embedding1 = GLOVE_INDEX[word]
+        embeddings_index1[idx] = embedding1
     except:
         pass
+
+import spacy
+
+nlp = spacy.load('en_core_web_md')
  
-from keras.models import Sequential
-from keras.layers import Dense, CuDNNLSTM, LSTM, Embedding, Conv1D, MaxPooling1D, Flatten
+EMBEDDINGS_LEN = len(nlp.vocab['apple'].vector)
+print("EMBEDDINGS_LEN=", EMBEDDINGS_LEN)  # 300
+ 
+embeddings_index2 = np.zeros((len(vectorizer.get_feature_names()) + 1, EMBEDDINGS_LEN))
+for word, idx in word2idx.items():
+    try:
+        embedding2 = nlp.vocab[word].vector
+        embeddings_index2[idx] = embedding2
+    except:
+        pass        
+
+from keras.layers import Dense, CuDNNLSTM, LSTM, Embedding, Input, Concatenate
+from keras.models import Model
 import matplotlib.pyplot as plt
 from keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLROnPlateau
-import keras.backend as K
- 
-model = Sequential()
-model.add(Embedding(len(vectorizer.get_feature_names()) + 1,
+
+x = Input(shape=(MAX_SEQ_LENGTH,))
+Embedding_Twitter = Embedding(len(vectorizer.get_feature_names()) + 1,
                     GLOVE_VECTOR_LENGTH,  # Embedding size
-                    weights=[embeddings_index],
+                    weights=[embeddings_index1],
                     input_length=MAX_SEQ_LENGTH,
-                    trainable=False))
-model.add(CuDNNLSTM(GLOVE_VECTOR_LENGTH))
-model.add(Dense(units=7, activation='softmax'))
+                    trainable=False)(x)
+LSTM_Twitter = CuDNNLSTM(GLOVE_VECTOR_LENGTH)(Embedding_Twitter)
+Dense_Twitter = Dense(GLOVE_VECTOR_LENGTH)(LSTM_Twitter)
+Embedding_Spacy = Embedding(len(vectorizer.get_feature_names()) + 1,
+                  EMBEDDINGS_LEN,
+                  weights = [embeddings_index2],
+                  input_length=MAX_SEQ_LENGTH,
+                  trainable = False)(x)
+LSTM_Spacy = CuDNNLSTM(EMBEDDINGS_LEN)(Embedding_Spacy)
+Dense_Spacy = Dense(EMBEDDINGS_LEN)(LSTM_Spacy)
+LSTM_Merge = Concatenate(axis=1)([Dense_Twitter, Dense_Spacy])
+y = Dense(units=7, activation='softmax')(LSTM_Merge) 
+model = Model(x, y) 
  
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy', f1])
 model.summary()
 
-checkpointer = ModelCheckpoint(filepath='models/LSTM_NLP_v3_TWITTER.hdf5', verbose=1, save_best_only=True)
+checkpointer = ModelCheckpoint(filepath='models/LSTM_NLP_ensemble_v2.hdf5', verbose=1, save_best_only=True)
 reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.2,
                               patience=1, min_lr=0.001)
 early_stop = EarlyStopping(monitor='val_loss', patience = 3)
@@ -136,12 +157,12 @@ history = model.fit(X_train_sequences[:-500], y_train[:-500],
               epochs=10, batch_size=32, verbose=1, 
               validation_data=(X_train_sequences[-500:], y_train[-500:]),
               shuffle = True,
-              callbacks = [checkpointer, reduce_lr, checkpointer])
+              callbacks = [checkpointer, reduce_lr, early_stop])
 
 X_test_sequences = [to_sequence(tokenize, preprocess, word2idx, x) for x in X_test]
 X_test_sequences = pad_sequences(X_test_sequences, maxlen=MAX_SEQ_LENGTH, value=N_FEATURES)
 
-model.load_weights('models/LSTM_NLP_v3_TWITTER.hdf5')
+model.load_weights('models/LSTM_NLP_ensemble_v2.hdf5')
 scores = model.evaluate(X_test_sequences, y_test, verbose=1)
 print("Accuracy:", scores[1])  
 
@@ -150,13 +171,13 @@ y_pred = model.predict(X_test_sequences)
 matrix = confusion_matrix(y_test.argmax(axis=1), y_pred.argmax(axis=1))
 
 def plot_train_history_accuracy(history):
-    # summarize history for accuracy and loss
+    # summarize history for loss
     plt.plot(history.history['acc'])
     plt.plot(history.history['val_acc'])
     plt.plot(history.history['loss'])
     plt.plot(history.history['val_loss'])
     plt.title('model accuracy')
-    plt.ylabel('accuracy/loss')
+    plt.ylabel('accuracy')
     plt.xlabel('epoch')
     plt.legend(['train', 'test', 'loss', 'val_loss'], loc='upper right')
     plt.show()
